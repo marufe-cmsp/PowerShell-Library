@@ -1,6 +1,8 @@
 function New-DWPFile {
     param (
         [Parameter(Mandatory = $true)]
+        [string]$ProjectID,
+        [Parameter(Mandatory = $true)]
         [string]$FilePath
     )
 
@@ -9,7 +11,7 @@ function New-DWPFile {
             throw "File not found: $FilePath"
         }
 
-        $uri = "https://compassmsp.workplace.datto.com/1/api/v1/file/F492-G02C-VYZL-XU70-96Y6/files"
+        $uri = "https://compassmsp.workplace.datto.com/1/api/v1/file/$ProjectID/files"
 
         $response = Invoke-RestMethod -Uri $uri -Method Post -Form @{
             file = Get-Item -Path $FilePath
